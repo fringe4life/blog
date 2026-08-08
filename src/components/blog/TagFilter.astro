@@ -1,0 +1,34 @@
+---
+import Link from "@/components/ui/Link.astro";
+import { BLOG_TAGS, tagHref, type BlogTag } from "@/content/blog-tags";
+import { columns, container } from "@/styles/utilities.css";
+import { tagFilter } from "./tag-filter.css";
+
+interface Props {
+  currentTag?: BlogTag;
+}
+
+const { currentTag } = Astro.props;
+
+const filters = [
+  { label: "All", tag: undefined as BlogTag | undefined },
+  ...BLOG_TAGS.map((tag) => ({ label: tag, tag })),
+];
+---
+
+<nav class:list={[container, tagFilter, columns]} aria-label="Filter by tag">
+  {
+    filters.map(({ label, tag }) => {
+      const active = tag === currentTag;
+      return (
+        <Link
+          href={tagHref(tag)}
+          variant={active ? "primary" : "secondary"}
+          aria-current={active ? "page" : undefined}
+        >
+          {label}
+        </Link>
+      );
+    })
+  }
+</nav>

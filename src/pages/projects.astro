@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/ui/Header.astro";
+import { containerRows } from "@/styles/utilities.css.ts";
+import Projects from "@/components/home/Projects.astro";
+---
+
+<Layout title="My Recent Projects" description="Home page">
+  <div class={containerRows}>
+    <Header tagName="h1" tagSize="h1">Latest Projects</Header>
+    <Projects />
+  </div>
+</Layout>

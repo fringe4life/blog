@@ -1,0 +1,20 @@
+---
+import { footerStyles } from "./footer.css.ts";
+---
+
+<footer class={footerStyles}>
+  <p>
+    &copy; <span id="year">2026</span> Katie Haus. All rights reserved. I'm a skilled
+    web developer passionate about creating innovative and user-friendly websites.
+  </p>
+</footer>
+
+<script>
+  const year = new Date().getFullYear();
+  const yearElement = document.getElementById("year");
+  if (yearElement) {
+    yearElement.textContent = year.toString();
+  } else {
+    throw new Error("Year element not found");
+  }
+</script>

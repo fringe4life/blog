@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Header from "../ui/Header.astro";
+import Link from "../ui/Link.astro";
+import {
+  card,
+  cardBody,
+  cardBodyLayout,
+  cardImage,
+  cardLayout,
+} from "../ui/card.css.ts";
+import { Image } from "astro:assets";
+
+type Props = CollectionEntry<"projects">;
+
+const {
+  data: { title, href, image, id },
+} = Astro.props;
+---
+
+<div
+  class:list={[card, cardLayout.project]}
+  aria-label={title}
+  transition:name={`${id}-card`}
+>
+  <Image class={cardImage} src={image} width={400} height={225} alt="" />
+  <div class:list={[cardBody, cardBodyLayout.project]}>
+    <Header tagName="h3" tagSize="h4">{title}</Header>
+    <Link href={href} variant="secondary" stretch>{title}</Link>
+  </div>
+</div>

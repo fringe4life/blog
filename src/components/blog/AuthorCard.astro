@@ -1,0 +1,27 @@
+---
+import { blogBioContent } from "./author-card.css";
+import { blogHeroContent, blogHeroImage, blogHeroText } from "./header.css";
+import katies from "@/assets/avatar.jpeg";
+import Header from "../ui/Header.astro";
+import Link from "../ui/Link.astro";
+import { Image } from "astro:assets";
+---
+
+<section aria-label="Connect with Katy" class={blogBioContent}>
+  <Image
+    src={katies}
+    alt="Katie Haus"
+    width={86}
+    height={86}
+    class={blogHeroImage}
+  />
+  <div class={blogHeroContent}>
+    <Header tagName="h1" tagSize="h2" id="blog-posts">👋 Hey, I'm Katie</Header>
+    <p class={blogHeroText}>
+      I like to write about productivity, web development, design, and working
+      with clients. Get a sense of what it’s like to work with me and understand
+      my process.
+    </p>
+    <Link href="/#connect">Contact Me</Link>
+  </div>
+</section>

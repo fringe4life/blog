@@ -1,0 +1,43 @@
+{
+  "name": "mod-6",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write . --experimental-cli",
+    "format:check": "prettier --check . --experimental-cli",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^9.0.1",
+    "@vanilla-extract/css": "^1.21.2",
+    "@vanilla-extract/css-utils": "^0.1.6",
+    "astro": "^7.2.0",
+    "svelte": "^5.56.8",
+    "svelte-sonner": "^1.1.1",
+    "typescript": "6.0.3"
+  },
+  "devDependencies": {
+    "@antebudimir/eslint-plugin-vanilla-extract": "^1.17.0",
+    "@eslint/js": "^10.0.1",
+    "@vanilla-extract/vite-plugin": "^5.2.6",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.1.0",
+    "eslint-plugin-svelte": "^3.22.0",
+    "globals": "^17.9.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-svelte": "^4.1.1",
+    "typescript-eslint": "^8.66.0"
+  }
+}

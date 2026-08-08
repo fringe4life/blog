@@ -1,0 +1,26 @@
+---
+import Toaster from "@/components/Toaster.svelte";
+import "@/styles/variables.css.ts";
+import BaseHead from "./BaseHead.astro";
+import Footer from "./Footer.astro";
+import Nav from "./Nav.astro";
+import { body, main } from "./layout.css.ts";
+import "@/styles/reset.css.ts";
+interface Props {
+  title: string;
+  description: string;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <BaseHead {...Astro.props} />
+  <body class={body}>
+    <Nav />
+    <main class={main}>
+      <slot />
+    </main>
+    <Footer />
+    <Toaster client:load />
+  </body>
+</html>

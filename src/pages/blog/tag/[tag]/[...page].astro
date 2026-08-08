@@ -1,0 +1,95 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import { container, gridWrapper } from "@/styles/utilities.css";
+import BlogCard from "@/components/blog/BlogCard.astro";
+import Pagination from "@/components/blog/Pagination.astro";
+import BlogHero from "@/components/blog/BlogHero.astro";
+import TagFilter from "@/components/blog/TagFilter.astro";
+import Hero from "@/components/Hero.astro";
+import { slide } from "astro:transitions";
+import { tagFromSlug } from "@/content/blog-tags";
+import {
+  BLOG_PAGE_SIZE,
+  BLOG_TAGS,
+  BLOG_TAG_SLUGS,
+  emptyTagPage,
+  getPublishedBlog,
+  postsForTag,
+  withPageCacheKey,
+  type BlogEntry,
+} from "@/lib/blog";
+import type { Page } from "astro";
+import type { BlogTag } from "@/content/blog-tags";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const blog = await getPublishedBlog();
+
+  return BLOG_TAGS.flatMap((tag) => {
+    const tagSlug = BLOG_TAG_SLUGS[tag];
+    const filtered = postsForTag(blog, tag);
+
+    if (filtered.length === 0) {
+      return withPageCacheKey([
+        {
+          params: { tag: tagSlug, page: undefined },
+          props: { page: emptyTagPage(tagSlug), tag },
+        },
+      ]);
+    }
+
+    return withPageCacheKey(
+      paginate(filtered, {
+        params: { tag: tagSlug },
+        pageSize: BLOG_PAGE_SIZE,
+        props: { tag },
+      }),
+    );
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<BlogEntry>;
+  tag: BlogTag;
+}
+
+const { page, tag } = Astro.props;
+const { data, currentPage, url } = page;
+const resolvedTag = tagFromSlug(Astro.params.tag ?? "") ?? tag;
+const isEmpty = data.length === 0;
+---
+
+<Layout
+  title={isEmpty
+    ? `My Blog | ${resolvedTag}`
+    : `My Blog | ${resolvedTag} | page ${currentPage}`}
+  description={`Blog posts tagged ${resolvedTag}`}
+>
+  <BlogHero currentPage={currentPage} />
+  <TagFilter currentTag={resolvedTag} />
+  {
+    isEmpty ? (
+      <Hero
+        header="No posts yet"
+        text={`Nothing under “${resolvedTag}” right now. Check back later, or browse the full blog.`}
+        links={[
+          { title: "All posts", href: "/blog", variant: "secondary" },
+          { title: "Home", href: "/" },
+        ]}
+      />
+    ) : (
+      <div class={container}>
+        <section
+          class={gridWrapper}
+          transition:name="blog-list"
+          transition:animate={slide({ duration: 0.5 })}
+        >
+          {data.map((blog) => (
+            <BlogCard {...blog} />
+          ))}
+        </section>
+        <Pagination prev={url.prev} next={url.next} />
+      </div>
+    )
+  }
+</Layout>

@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import katies from "@/assets/avatar.jpeg";
+import Header from "./ui/Header.astro";
+import Link from "./ui/Link.astro";
+import { heroStyles, imageStyles, textStyles } from "./hero.css.ts";
+import { columns } from "@/styles/utilities.css.ts";
+
+type HeroLink = {
+  title: string;
+  href: string;
+  variant?: "secondary" | "ghost" | "icon";
+};
+
+interface Props {
+  header: string;
+  text: string;
+  links: HeroLink[];
+}
+
+const { header, text, links } = Astro.props;
+---
+
+<section class={heroStyles} aria-label="Hero section">
+  <Image
+    src={katies}
+    alt="Katie Haus"
+    width={200}
+    height={200}
+    class={imageStyles}
+    loading="eager"
+  />
+  <Header tagName="h1" tagSize="h2">{header}</Header>
+  <p class={textStyles}>{text}</p>
+  <div class={columns}>
+    {
+      links.map((link) => (
+        <Link href={link.href} variant={link.variant}>
+          {link.title}
+        </Link>
+      ))
+    }
+  </div>
+</section>

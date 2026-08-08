@@ -1,0 +1,47 @@
+---
+import {
+  blogMetadata,
+  blogMetadataContent,
+  blogMetadataHeader,
+  blogMetadataImage,
+} from "./blog-metadata.css";
+import FormattedDate from "../ui/FormattedDate.astro";
+import type { CollectionEntry } from "astro:content";
+import type { ImageMetadata } from "astro";
+import Header from "../ui/Header.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  pubDate: Date;
+  authorData: CollectionEntry<"authors">;
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  slug: string;
+}
+
+const { pubDate, authorData, title, description, image, slug } = Astro.props;
+---
+
+<section class={blogMetadata} aria-labelledby="blog-metadata-header">
+  <header class={blogMetadataHeader}>
+    <FormattedDate pubDate={pubDate} transition:name={`${slug}-date`} />
+    <Header
+      tagName="h1"
+      tagSize="h2"
+      id="blog-metadata-header"
+      transition:name={`${slug}-title`}>{title}</Header
+    >
+    <small>{authorData.data.name}</small>
+    <p class={blogMetadataContent}>{description}</p>
+  </header>
+  <Image
+    loading="eager"
+    class={blogMetadataImage}
+    src={image}
+    width={400}
+    height={225}
+    alt=""
+    transition:name={`${slug}-image`}
+  />
+</section>

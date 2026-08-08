@@ -1,0 +1,48 @@
+---
+import { getEntry, type CollectionEntry } from "astro:content";
+import Header from "../ui/Header.astro";
+import Link from "../ui/Link.astro";
+import {
+  card,
+  cardBody,
+  cardBodyLayout,
+  cardImage,
+  cardLayout,
+} from "../ui/card.css.ts";
+import { columns } from "@/styles/utilities.css";
+import FormattedDate from "../ui/FormattedDate.astro";
+import { Image } from "astro:assets";
+
+type Props = CollectionEntry<"blog">;
+
+const {
+  data: { title, slug, image, pubDate, author },
+} = Astro.props;
+
+const authorData = await getEntry("authors", author.id);
+
+if (!authorData) {
+  return Astro.redirect("/404");
+}
+---
+
+<div class:list={[card, cardLayout.blog]} aria-label={title}>
+  <Image
+    class={cardImage}
+    src={image}
+    width={400}
+    height={225}
+    alt=""
+    transition:name={`${slug}-image`}
+  />
+  <div class:list={[cardBody, cardBodyLayout.blog]}>
+    <Header tagName="h3" tagSize="h4" transition:name={`${slug}-title`}
+      >{title}</Header
+    >
+    <div class={columns}>
+      <FormattedDate pubDate={pubDate} transition:name={`${slug}-date`} />
+      <small>{authorData.data.name}</small>
+    </div>
+    <Link href={`/blog/${slug}`} variant="secondary" stretch>{title}</Link>
+  </div>
+</div>

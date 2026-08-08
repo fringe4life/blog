@@ -1,0 +1,39 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import { container, gridWrapper } from "@/styles/utilities.css";
+import BlogCard from "@/components/blog/BlogCard.astro";
+import Pagination from "@/components/blog/Pagination.astro";
+import BlogHero from "@/components/blog/BlogHero.astro";
+import TagFilter from "@/components/blog/TagFilter.astro";
+import { slide } from "astro:transitions";
+import { BLOG_PAGE_SIZE, getPublishedBlog, withPageCacheKey } from "@/lib/blog";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const sortedBlog = await getPublishedBlog();
+  return withPageCacheKey(paginate(sortedBlog, { pageSize: BLOG_PAGE_SIZE }));
+}) satisfies GetStaticPaths;
+
+const {
+  page: {
+    data,
+    currentPage,
+    url: { next, prev },
+  },
+} = Astro.props;
+---
+
+<Layout title={`My Blog | page ${currentPage}`} description="Blog">
+  <BlogHero currentPage={currentPage} />
+  <TagFilter />
+  <div class={container}>
+    <section
+      class={gridWrapper}
+      transition:name="blog-list"
+      transition:animate={slide({ duration: 0.5 })}
+    >
+      {data.map((blog) => <BlogCard {...blog} />)}
+    </section>
+    <Pagination prev={prev} next={next} />
+  </div>
+</Layout>

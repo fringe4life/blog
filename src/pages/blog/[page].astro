@@ -1,0 +1,46 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, getEntry, render } from "astro:content";
+import BlogMetadata from "@/components/blog/BlogMetadata.astro";
+import { blogContent } from "@/components/blog/blog-content.css";
+import AuthorCard from "@/components/blog/AuthorCard.astro";
+
+export const getStaticPaths = async () => {
+  const blog = await getCollection("blog", ({ data }) => !data.isDraft);
+  return blog.map((blog) => ({
+    params: { page: blog.data.slug },
+    props: {
+      blogPost: blog,
+    },
+    cacheKey: blog.digest,
+  }));
+};
+const { blogPost } = Astro.props;
+
+if (!blogPost) {
+  return Astro.redirect("/404");
+}
+
+const authorData = await getEntry("authors", blogPost.data.author.id);
+
+if (!authorData) {
+  return Astro.redirect("/404");
+}
+const { Content } = await render(blogPost);
+---
+
+<Layout
+  title={`My Blog | ${blogPost.data.title}`}
+  description={blogPost.data.description}
+>
+  <BlogMetadata
+    slug={blogPost.data.slug}
+    pubDate={blogPost.data.pubDate}
+    authorData={authorData}
+    title={blogPost.data.title}
+    description={blogPost.data.description}
+    image={blogPost.data.image}
+  />
+  <section class={blogContent} aria-label="Blog Content"><Content /></section>
+  <AuthorCard />
+</Layout>

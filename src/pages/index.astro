@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Features from "@/components/home/Features.astro";
+import Projects from "@/components/home/Projects.astro";
+import { containerRows, gridWrapper } from "@/styles/utilities.css";
+import Header from "@/components/ui/Header.astro";
+import { getCollection } from "astro:content";
+import BlogCard from "@/components/blog/BlogCard.astro";
+import Connect from "@/components/Connect.astro";
+const blogs = await getCollection("blog", ({ data }) => !data.isDraft);
+
+const blogsToShow = blogs
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+---
+
+<Layout
+  title="Katie Haus Portfolio Site"
+  description="Welcome to my portfolio site! I'm a self-taught designer and developer obsessed with quality."
+>
+  <Hero
+    header="👋 Hi, I'm Katie"
+    text="I'm a self-taught designer and developer obsessed with quality."
+    links={[
+      {
+        title: "Download CV",
+        href: "/katie-haus-cv.pdf",
+        variant: "secondary",
+      },
+      { href: "#connect", title: "Let's connect" },
+    ]}
+  />
+  <Features />
+  <section class={containerRows} aria-labelledby="recent-projects">
+    <Header tagName="h2" tagSize="h2" id="recent-projects"
+      >Recent Projects</Header
+    >
+    <Projects limit={3} />
+  </section>
+  <Connect />
+  <section class={containerRows} aria-labelledby="recent-blog-posts">
+    <Header tagName="h2" tagSize="h2" id="recent-blog-posts"
+      >Recent Blog Posts</Header
+    >
+    <div class={gridWrapper}>
+      {blogsToShow.map((blog) => <BlogCard {...blog} />)}
+    </div>
+  </section>
+</Layout>

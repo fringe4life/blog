@@ -1,0 +1,37 @@
+---
+import {
+  nextArrow,
+  pagination,
+  paginationLink,
+  previousArrow,
+} from "@/components/blog/pagination.css";
+import Link from "@/components/ui/Link.astro";
+
+interface Props {
+  prev?: string;
+  next?: string;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class={pagination} aria-label="Pagination" transition:name="pagination">
+  <Link
+    variant="secondary"
+    href={prev}
+    disabled={!prev}
+    aria-label="Previous page"
+    class:list={[paginationLink, previousArrow]}
+    transition:name="pagination-prev"
+    ><span class={previousArrow} aria-hidden="true">&larr;</span></Link
+  >
+  <Link
+    variant="secondary"
+    href={next}
+    disabled={!next}
+    aria-label="Next page"
+    class:list={[paginationLink, nextArrow]}
+    transition:name="pagination-next"
+    ><span class={nextArrow} aria-hidden="true">&rarr;</span></Link
+  >
+</nav>

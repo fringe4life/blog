@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Connect from "@/components/Connect.astro";
+---
+
+<Layout
+  title="404 | Page not found"
+  description="Oops! The page you're looking for seems to have wandered off."
+>
+  <Hero
+    header="😬 Are you lost?"
+    text="Oops! The page you're looking for seems to have wandered off. Please try again or visit our homepage for more information."
+    links={[
+      {
+        title: "Download CV",
+        href: "/katie-haus-cv.pdf",
+        variant: "secondary",
+      },
+      { href: "/", title: "Home" },
+    ]}
+  />
+  <Connect />
+</Layout>

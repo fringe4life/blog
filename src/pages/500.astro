@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Connect from "@/components/Connect.astro";
+---
+
+<Layout
+  title="500 | Something went wrong"
+  description="Something went wrong on our end. Please try again or head back home."
+>
+  <Hero
+    header="Something broke"
+    text="Something went wrong on our end. Please try again in a moment, or visit the homepage while we sort it out."
+    links={[
+      {
+        title: "Blog",
+        href: "/blog",
+        variant: "secondary",
+      },
+      { href: "/", title: "Home" },
+    ]}
+  />
+  <Connect />
+</Layout>

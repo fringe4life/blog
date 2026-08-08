@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import {
+  connectContainer,
+  connectImage,
+  formWrapper,
+  media,
+} from "./connect.css";
+import katies from "@/assets/avatar.jpeg";
+import ContactForm from "./ContactForm.svelte";
+---
+
+<section class={connectContainer} aria-labelledby="connect-header" id="connect">
+  <div class={formWrapper}>
+    <div class={media}>
+      <Image
+        src={katies}
+        alt="Katie Haus"
+        width={200}
+        height={250}
+        class={connectImage}
+      />
+    </div>
+    <ContactForm client:visible />
+  </div>
+</section>

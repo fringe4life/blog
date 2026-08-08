@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cardStretch, disabledVariants, link, variants } from "./link.css.ts";
+
+interface Props extends HTMLAttributes<"a"> {
+  variant?: keyof typeof variants;
+  stretch?: boolean;
+  disabled?: boolean;
+}
+
+const {
+  variant = "primary",
+  stretch = false,
+  disabled = false,
+  class: className,
+  href,
+  tabindex: tabIndex,
+  ...props
+} = Astro.props;
+---
+
+<a
+  class:list={[
+    link,
+    variants[variant],
+    disabled && disabledVariants[variant],
+    stretch && cardStretch,
+    className,
+  ]}
+  {...props}
+  href={disabled ? undefined : href}
+  aria-disabled={disabled ? "true" : undefined}
+  tabindex={disabled ? -1 : tabIndex}
+>
+  <slot />
+</a>

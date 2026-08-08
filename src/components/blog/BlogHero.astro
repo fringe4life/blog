@@ -1,0 +1,43 @@
+---
+import katies from "@/assets/avatar.jpeg";
+import Header from "@/components/ui/Header.astro";
+import {
+  blogHeroContainer,
+  blogHeroContent,
+  blogHeroImage,
+  blogHeroSpan,
+  blogHeroText,
+} from "@/components/blog/header.css";
+import { fade } from "astro:transitions";
+import { Image } from "astro:assets";
+interface Props {
+  currentPage: number;
+}
+
+const { currentPage } = Astro.props;
+---
+
+<section class={blogHeroContainer} aria-labelledby="blog-posts">
+  <Image
+    src={katies}
+    alt="Katie Haus"
+    width={90}
+    height={90}
+    class={blogHeroImage}
+    transition:persist
+  />
+  <div class={blogHeroContent}>
+    <Header tagName="h1" tagSize="h2" id="blog-posts"
+      >My Blog <span
+        class={blogHeroSpan}
+        transition:name={`blog-page-${currentPage}-span`}
+        transition:animate={fade({ duration: 0.5 })}>page {currentPage}</span
+      ></Header
+    >
+    <p transition:persist class={blogHeroText}>
+      I like to write about productivity, web development, design, and working
+      with clients. Get a sense of what it's like to work with me and understand
+      my process.
+    </p>
+  </div>
+</section>

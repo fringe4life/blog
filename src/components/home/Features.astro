@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import Header from "../ui/Header.astro";
+import { featuresStyles, inner, item } from "./features.css.ts";
+import { list } from "@/styles/list.css.ts";
+const features = await getCollection("features");
+---
+
+<section class={featuresStyles} aria-label="Features section">
+  <div class={inner}>
+    <Header tagName="h2" tagSize="h2"
+      >I build fast, sleek, modern websites.</Header
+    >
+    <ul role="list" class={list}>
+      {
+        features.map((feature) => (
+          <li class={item}>
+            <Fragment set:html={feature.data.icon} />
+            <Header tagName="h3" tagSize="h4">
+              {feature.data.title}
+            </Header>
+            <p>{feature.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

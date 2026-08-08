@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { header, sizes } from "./header.css.ts";
+
+type HeadingOptions = keyof typeof sizes;
+
+interface Props extends HTMLAttributes<HeadingOptions> {
+  tagName: HeadingOptions;
+  tagSize: HeadingOptions;
+}
+
+const { tagName, tagSize, class: className, ...props } = Astro.props;
+
+const Component = tagName;
+---
+
+<Component class:list={[header, sizes[tagSize], className]} {...props}
+  ><slot /></Component
+>
