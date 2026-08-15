@@ -9,13 +9,15 @@ export const container = style({
   alignSelf: "start",
 });
 
-export const gridWrapper = style({
+export const containerInline = style({
   containerType: "inline-size",
+});
+
+export const gridWrapper = style({
   display: "grid",
   width: "100%",
   gridTemplateColumns: "repeat(auto-fill, minmax(min(300px, 100%), 1fr))",
   gap: `${variables.space.lg} ${variables.space.xs}`,
-  alignItems: "stretch",
 });
 
 export const rows = style({

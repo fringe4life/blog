@@ -1,17 +1,24 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
-import { container, gridWrapper } from "@/styles/utilities.css";
+import {
+  container,
+  containerInline,
+  gridWrapper,
+} from "@/styles/utilities.css";
 import BlogCard from "@/components/blog/BlogCard.astro";
 import Pagination from "@/components/blog/Pagination.astro";
 import BlogHero from "@/components/blog/BlogHero.astro";
 import TagFilter from "@/components/blog/TagFilter.astro";
-import { slide } from "astro:transitions";
-import { BLOG_PAGE_SIZE, getPublishedBlog, withPageCacheKey } from "@/lib/blog";
+import {
+  paginationOffsetTransition,
+  paginationViewTransition,
+} from "@/components/blog/pagination-transition.css";
+import { BLOG_PAGE_SIZE, getPublishedBlog } from "@/lib/blog";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const sortedBlog = await getPublishedBlog();
-  return withPageCacheKey(paginate(sortedBlog, { pageSize: BLOG_PAGE_SIZE }));
+  return paginate(sortedBlog, { pageSize: BLOG_PAGE_SIZE });
 }) satisfies GetStaticPaths;
 
 const {
@@ -27,13 +34,14 @@ const {
   <BlogHero currentPage={currentPage} />
   <TagFilter />
   <div class={container}>
+    <div class={containerInline}></div>
     <section
       class={gridWrapper}
-      transition:name="blog-list"
-      transition:animate={slide({ duration: 0.5 })}
+      transition:name={paginationViewTransition}
+      transition:animate={paginationOffsetTransition}
     >
       {data.map((blog) => <BlogCard {...blog} />)}
     </section>
-    <Pagination prev={prev} next={next} />
   </div>
+  <Pagination prev={prev} next={next} />
 </Layout>

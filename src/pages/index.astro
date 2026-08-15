@@ -3,7 +3,11 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import Features from "@/components/home/Features.astro";
 import Projects from "@/components/home/Projects.astro";
-import { containerRows, gridWrapper } from "@/styles/utilities.css";
+import {
+  containerInline,
+  containerRows,
+  gridWrapper,
+} from "@/styles/utilities.css";
 import Header from "@/components/ui/Header.astro";
 import { getCollection } from "astro:content";
 import BlogCard from "@/components/blog/BlogCard.astro";
@@ -43,8 +47,10 @@ const blogsToShow = blogs
     <Header tagName="h2" tagSize="h2" id="recent-blog-posts"
       >Recent Blog Posts</Header
     >
-    <div class={gridWrapper}>
-      {blogsToShow.map((blog) => <BlogCard {...blog} />)}
+    <div class={containerInline}>
+      <div class={gridWrapper}>
+        {blogsToShow.map((blog) => <BlogCard {...blog} />)}
+      </div>
     </div>
   </section>
 </Layout>

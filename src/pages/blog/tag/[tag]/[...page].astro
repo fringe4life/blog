@@ -1,13 +1,20 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
-import { container, gridWrapper } from "@/styles/utilities.css";
+import {
+  container,
+  containerInline,
+  gridWrapper,
+} from "@/styles/utilities.css";
 import BlogCard from "@/components/blog/BlogCard.astro";
 import Pagination from "@/components/blog/Pagination.astro";
 import BlogHero from "@/components/blog/BlogHero.astro";
 import TagFilter from "@/components/blog/TagFilter.astro";
 import Hero from "@/components/Hero.astro";
-import { slide } from "astro:transitions";
+import {
+  paginationOffsetTransition,
+  paginationViewTransition,
+} from "@/components/blog/pagination-transition.css";
 import { tagFromSlug } from "@/content/blog-tags";
 import {
   BLOG_PAGE_SIZE,
@@ -16,7 +23,6 @@ import {
   emptyTagPage,
   getPublishedBlog,
   postsForTag,
-  withPageCacheKey,
   type BlogEntry,
 } from "@/lib/blog";
 import type { Page } from "astro";
@@ -30,21 +36,19 @@ export const getStaticPaths = (async ({ paginate }) => {
     const filtered = postsForTag(blog, tag);
 
     if (filtered.length === 0) {
-      return withPageCacheKey([
+      return [
         {
           params: { tag: tagSlug, page: undefined },
           props: { page: emptyTagPage(tagSlug), tag },
         },
-      ]);
+      ];
     }
 
-    return withPageCacheKey(
-      paginate(filtered, {
-        params: { tag: tagSlug },
-        pageSize: BLOG_PAGE_SIZE,
-        props: { tag },
-      }),
-    );
+    return paginate(filtered, {
+      params: { tag: tagSlug },
+      pageSize: BLOG_PAGE_SIZE,
+      props: { tag },
+    });
   });
 }) satisfies GetStaticPaths;
 
@@ -79,15 +83,17 @@ const isEmpty = data.length === 0;
       />
     ) : (
       <div class={container}>
-        <section
-          class={gridWrapper}
-          transition:name="blog-list"
-          transition:animate={slide({ duration: 0.5 })}
-        >
-          {data.map((blog) => (
-            <BlogCard {...blog} />
-          ))}
-        </section>
+        <div class={containerInline}>
+          <section
+            class={gridWrapper}
+            transition:name={paginationViewTransition}
+            transition:animate={paginationOffsetTransition}
+          >
+            {data.map((blog) => (
+              <BlogCard {...blog} />
+            ))}
+          </section>
+        </div>
         <Pagination prev={url.prev} next={url.next} />
       </div>
     )

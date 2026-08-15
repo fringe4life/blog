@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # prettier experimental CLI cache
 .prettier-cache
+
+# cloudflare / wrangler
+.wrangler/
+.dev.vars

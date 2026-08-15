@@ -1,4 +1,4 @@
-import type { GetStaticPathsItem, Page } from "astro";
+import type { Page } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { BLOG_TAGS, BLOG_TAG_SLUGS, type BlogTag } from "@/content/blog-tags";
 
@@ -40,17 +40,17 @@ export function postsForTag(blog: BlogEntry[], tag: BlogTag) {
  * `paginate()` has no cacheKey option — stamp digests onto each path for incrementalBuild.
  * Keep `T` generic so paginate's `{ page: Page<Data> }` props survive (GetStaticPathsResult is not generic).
  */
-export function withPageCacheKey<T extends GetStaticPathsItem>(
-  paths: readonly T[],
-): Array<T & { cacheKey: string }> {
-  return paths.map((path) => {
-    const page = (path.props as { page?: Page<BlogEntry> } | undefined)?.page;
-    const digests = page?.data.map((entry) => String(entry.digest)).join("|");
-    return {
-      ...path,
-      cacheKey: digests || `empty:${JSON.stringify(path.params)}`,
-    };
-  });
-}
+// export function withPageCacheKey<T extends GetStaticPathsItem>(
+//   paths: readonly T[],
+// ): Array<T & { cacheKey: string }> {
+//   return paths.map((path) => {
+//     const page = (path.props as { page?: Page<BlogEntry> } | undefined)?.page;
+//     const digests = page?.data.map((entry) => String(entry.digest)).join("|");
+//     return {
+//       ...path,
+//       cacheKey: digests || `empty:${JSON.stringify(path.params)}`,
+//     };
+//   });
+// }
 
 export { BLOG_TAGS, BLOG_TAG_SLUGS };

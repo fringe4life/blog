@@ -63,3 +63,7 @@ globalStyle("time", {
   textTransform: "uppercase",
   fontSize: variables.fs.xs,
 });
+
+globalStyle("html", {
+  scrollBehavior: "smooth",
+});

@@ -1,22 +1,3 @@
-// .blog-metadata {
-// 	display: grid;
-// 	place-items: center;
-// 	gap: var(--space-md);
-// 	header {
-// 		width: fit-content;
-// 		max-width: 800px;
-// 		margin-inline: auto;
-// 		padding: var(--space-md);
-// 		background-color: var(--color-frg);
-// 		display: grid;
-// 		gap: var(--space-2xs);
-// 		p {
-// 			text-wrap: pretty;
-// 		}
-// 	}
-
-// }
-
 import { variables } from "@/styles/variables.css";
 import { style } from "@vanilla-extract/css";
 

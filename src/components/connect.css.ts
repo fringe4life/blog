@@ -86,7 +86,9 @@ export const formInput = style({
   border: `${variables.border.sm} solid ${variables.color.accent}`,
   borderRadius: variables.rounded.sm,
   fontWeight: variables.fw.regular,
-  transition: `all ${variables.fast} ${variables.cubic}`,
+  transitionProperty: ["color", "opacity", "outline"],
+  transitionDuration: variables.fast,
+  transitionTimingFunction: variables.cubic,
   selectors: {
     "&::placeholder": {
       color: variables.color.text,

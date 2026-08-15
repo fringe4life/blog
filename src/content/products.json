@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Notebook",
+    "price": 12.99,
+    "description": "A5 dotted notebook, 80gsm paper.",
+    "category": "stationery",
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Mechanical Pencil",
+    "price": 8.5,
+    "description": "0.5mm mechanical pencil with extra leads.",
+    "category": "stationery",
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "name": "USB-C Hub",
+    "price": 34,
+    "description": "4-port USB-C hub with HDMI.",
+    "category": "electronics",
+    "inStock": false
+  },
+  {
+    "id": 4,
+    "name": "Desk Lamp",
+    "price": 29.99,
+    "description": "Adjustable LED lamp, three brightness levels.",
+    "category": "home",
+    "inStock": true
+  },
+  {
+    "id": 5,
+    "name": "Water Bottle",
+    "price": 18,
+    "description": "750ml stainless steel bottle.",
+    "category": "home",
+    "inStock": true
+  }
+]

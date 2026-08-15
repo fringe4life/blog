@@ -3,6 +3,7 @@ export const BLOG_TAGS = [
   "Web Development",
   "Backend",
   "Frontend",
+  "Math",
 ] as const;
 
 export type BlogTag = (typeof BLOG_TAGS)[number];
@@ -12,6 +13,7 @@ export const BLOG_TAG_SLUGS = {
   "Web Development": "web-development",
   Backend: "backend",
   Frontend: "frontend",
+  Math: "math",
 } as const satisfies Record<BlogTag, string>;
 
 export type BlogTagSlug = (typeof BLOG_TAG_SLUGS)[BlogTag];

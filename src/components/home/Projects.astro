@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
-import { gridWrapper } from "@/styles/utilities.css.ts";
+import { containerInline, gridWrapper } from "@/styles/utilities.css.ts";
 const projects = await getCollection("projects");
 
 interface Props {
@@ -13,6 +13,8 @@ const { limit } = Astro.props;
 const projectsToShow = projects.slice(0, limit);
 ---
 
-<div class={gridWrapper}>
-  {projectsToShow.map((project) => <ProjectCard {...project} />)}
+<div class={containerInline}>
+  <div class={gridWrapper}>
+    {projectsToShow.map((project) => <ProjectCard {...project} />)}
+  </div>
 </div>

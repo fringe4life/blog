@@ -17,6 +17,18 @@ Excepteur veniam nostrud enim commodo officia duis commodo ullamco. Aliquip cons
 
 Incididunt velit ex esse voluptate ea id est mollit eiusmod cupidatat exercitation cillum consectetur amet sint. Ex ipsum consequat nulla mollit velit ea anim eu ullamco ut occaecat pariatur anim.
 
+```ts
+type Suggestion = {
+  id: string;
+  prompt: string;
+  confidence: number;
+};
+
+export function rankSuggestions(items: Suggestion[]) {
+  return [...items].sort((a, b) => b.confidence - a.confidence);
+}
+```
+
 ## Benefits of AI in Web Development
 
 Incididunt velit ex esse voluptate ea id est mollit eiusmod cupidatat exercitation cillum consectetur amet sint. Ex ipsum consequat nulla mollit velit ea anim eu ullamco ut occaecat pariatur anim.

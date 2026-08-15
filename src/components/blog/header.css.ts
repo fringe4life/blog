@@ -31,6 +31,7 @@ const blogHero = style({
 export const blogHeroContent = style({
   display: "grid",
   gap: variables.space.xs,
+  justifyItems: "start",
 });
 
 export const blogHeroContainer = style([container, blogHero]);
