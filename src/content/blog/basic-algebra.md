@@ -58,8 +58,10 @@ This is the reverse of factoring—two views of the same quantity.
 Two unknowns need two relationships:
 
 ```math
-x + y = 10
-x - y = 2
+\begin{aligned}
+x + y &= 10 \\
+x - y &= 2
+\end{aligned}
 ```
 
 Add the equations: `2x = 12`, so `x = 6`, then `y = 4`. Structure, not guessing, unlocks the pair.

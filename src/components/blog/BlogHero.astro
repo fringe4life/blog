@@ -27,13 +27,16 @@ const { currentPage } = Astro.props;
     transition:persist
   />
   <div class={blogHeroContent}>
-    <Header tagName="h1" tagSize="h2" id="blog-posts"
-      >My Blog <span
+    <Header tagName="h1" tagSize="h2" id="blog-posts">
+      My Blog{" "}
+      <span
         class={blogHeroSpan}
         transition:name={`blog-page-${currentPage}-span`}
-        transition:animate={fade({ duration: 0.5 })}>page {currentPage}</span
-      ></Header
-    >
+        transition:animate={fade({ duration: 0.5 })}
+      >
+        page {currentPage}
+      </span>
+    </Header>
     <p transition:persist class={blogHeroText}>
       I like to write about productivity, web development, design, and working
       with clients. Get a sense of what it's like to work with me and understand

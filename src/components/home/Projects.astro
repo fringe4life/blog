@@ -15,6 +15,8 @@ const projectsToShow = projects.slice(0, limit);
 
 <div class={containerInline}>
   <div class={gridWrapper}>
-    {projectsToShow.map((project) => <ProjectCard {...project} />)}
+    {projectsToShow.map((project) => (
+      <ProjectCard {...project} />
+    ))}
   </div>
 </div>

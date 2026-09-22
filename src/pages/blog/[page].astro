@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { getCollection, getEntry, render } from "astro:content";
 import BlogMetadata from "@/components/blog/BlogMetadata.astro";
+import "temml/dist/Temml-Local.css";
 import { blogContent } from "@/components/blog/blog-content.css";
 import AuthorCard from "@/components/blog/AuthorCard.astro";
 
@@ -41,6 +42,8 @@ const { Content } = await render(blogPost);
     description={blogPost.data.description}
     image={blogPost.data.image}
   />
-  <section class={blogContent} aria-label="Blog Content"><Content /></section>
+  <section class={blogContent} aria-label="Blog Content">
+    <Content />
+  </section>
   <AuthorCard />
 </Layout>

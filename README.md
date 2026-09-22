@@ -2,12 +2,12 @@
 
 Module 6 pulls previous lessons into one portfolio site: home, projects, blog, and contact — built with Astro, Svelte islands, and vanilla-extract.
 
-[![Astro](https://img.shields.io/badge/Astro-7.2.0-BC52EE?logo=astro&logoColor=white)](https://astro.build)
-[![Svelte](https://img.shields.io/badge/Svelte-5.56.8-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
+[![Astro](https://img.shields.io/badge/Astro-7.3.3-BC52EE?logo=astro&logoColor=white)](https://astro.build)
+[![Svelte](https://img.shields.io/badge/Svelte-5.57.1-FF3E00?logo=svelte&logoColor=white)](https://svelte.dev)
 [![vanilla-extract](https://img.shields.io/badge/vanilla--extract-1.21.2-FFF176?logo=css3&logoColor=333)](https://vanilla-extract.style)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![ESLint](https://img.shields.io/badge/ESLint-10.8.1-4B32C3?logo=eslint&logoColor=white)](https://eslint.org)
-[![Prettier](https://img.shields.io/badge/Prettier-3.9.6-F7B93E?logo=prettier&logoColor=333)](https://prettier.io)
+[![ESLint](https://img.shields.io/badge/ESLint-10.11.0-4B32C3?logo=eslint&logoColor=white)](https://eslint.org)
+[![Prettier](https://img.shields.io/badge/Prettier-3.9.8-F7B93E?logo=prettier&logoColor=333)](https://prettier.io)
 [![Cloudflare](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)](https://developers.cloudflare.com/workers/)
 [![Bun](https://img.shields.io/badge/Bun-runtime-000000?logo=bun&logoColor=white)](https://bun.sh)
 
@@ -50,9 +50,9 @@ bun run deploy:project # astro build + wrangler deploy
 
 ## Tech Stack
 
-- **Astro 7** — pages, layouts, Content Collections, sitemap, RSS (`@astrojs/rss`), font provider (Inter via Fontsource), `ClientRouter` view transitions
+- **Astro 7** — pages, layouts, Content Collections, sitemap, RSS (`@astrojs/rss`), font provider (Inter via Fontsource), `ClientRouter` view transitions, hover prefetch, incremental build
 - **@astrojs/cloudflare** — Workers adapter (`wrangler.jsonc`); Sharp image service at build (`imageService: "compile"`)
-- **Markdown** — Sätteri processor with `math: true`; Shiki (`catppuccin-latte`) for fences
+- **Markdown** — Sätteri processor with `math: true`; Temml renders MathML at build (`src/lib/temml-math.ts`); Shiki (`catppuccin-latte`) for fences
 - **Svelte 5** — client islands (`ContactForm`, `Toaster` + `svelte-sonner`)
 - **vanilla-extract** — type-safe CSS in `*.css.ts` (Vite plugin in `astro.config.mjs`)
 - **TypeScript** — strict Astro tsconfig + `@astrojs/check`
@@ -72,9 +72,9 @@ Defined in `src/content.config.ts`:
 | `projects` | `src/content/projects.yaml`  | Project links + images                |
 | `authors`  | remote JSONPlaceholder users | Fetched at build                      |
 
-Also: `src/content/products.json` served at `/api/products.json` (not a collection). RSS at `/rss.xml` (`stylesheet`: `public/rss/styles.xsl`).
+Also: `src/content/products.json` served at `/api/products.json` (not a collection). Blog entry JSON at `/api/[id].json`. RSS at `/rss.xml` (`stylesheet`: `public/rss/styles.xsl`).
 
-Blog helpers / pagination: `src/lib/blog.ts`.
+Blog helpers / pagination: `src/lib/blog.ts`. Math hast plugin: `src/lib/temml-math.ts`.
 
 ## Project Structure
 
@@ -97,12 +97,13 @@ src/
 │   └── projects.yaml
 ├── content.config.ts       # collection schemas + loaders
 ├── layouts/                # Layout, Nav, Footer, BaseHead (+ .css.ts)
-├── lib/                    # blog helpers (pagination, tags, incremental cacheKey)
+├── lib/                    # blog helpers + Temml math hast plugin
 ├── pages/
 │   ├── index.astro
 │   ├── projects.astro
 │   ├── rss.xml.ts
 │   ├── api/products.json.ts
+│   ├── api/[id].json.ts    # blog entry JSON
 │   ├── 404.astro / 500.astro
 │   └── blog/               # [...page] list, [page] post, tag/[tag] pagination
 └── styles/                 # variables, reset, utilities, keyframes, list

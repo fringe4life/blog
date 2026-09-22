@@ -25,7 +25,11 @@ const {
 >
   <Image class={cardImage} src={image} width={400} height={225} alt="" />
   <div class:list={[cardBody, cardBodyLayout.project]}>
-    <Header tagName="h3" tagSize="h4">{title}</Header>
-    <Link href={href} variant="secondary" stretch>{title}</Link>
+    <Header tagName="h3" tagSize="h4">
+      {title}
+    </Header>
+    <Link href={href} variant="secondary" stretch>
+      {title}
+    </Link>
   </div>
 </div>

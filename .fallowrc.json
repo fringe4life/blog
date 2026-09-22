@@ -4,9 +4,9 @@
     "minLines": 15,
     "minOccurrences": 3
   },
-  "ignoreDependencies": [],
   "rules": {
-    "test-only-dependencies": "off"
+    "test-only-dependencies": "off",
+    "unused-dependency-overrides": "off"
   },
   "health": {
     "maxCyclomatic": 20,

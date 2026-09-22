@@ -64,38 +64,38 @@ const isEmpty = data.length === 0;
 ---
 
 <Layout
-  title={isEmpty
-    ? `My Blog | ${resolvedTag}`
-    : `My Blog | ${resolvedTag} | page ${currentPage}`}
+  title={
+    isEmpty
+      ? `My Blog | ${resolvedTag}`
+      : `My Blog | ${resolvedTag} | page ${currentPage}`
+  }
   description={`Blog posts tagged ${resolvedTag}`}
 >
   <BlogHero currentPage={currentPage} />
   <TagFilter currentTag={resolvedTag} />
-  {
-    isEmpty ? (
-      <Hero
-        header="No posts yet"
-        text={`Nothing under “${resolvedTag}” right now. Check back later, or browse the full blog.`}
-        links={[
-          { title: "All posts", href: "/blog", variant: "secondary" },
-          { title: "Home", href: "/" },
-        ]}
-      />
-    ) : (
-      <div class={container}>
-        <div class={containerInline}>
-          <section
-            class={gridWrapper}
-            transition:name={paginationViewTransition}
-            transition:animate={paginationOffsetTransition}
-          >
-            {data.map((blog) => (
-              <BlogCard {...blog} />
-            ))}
-          </section>
-        </div>
-        <Pagination prev={url.prev} next={url.next} />
+  {isEmpty ? (
+    <Hero
+      header="No posts yet"
+      text={`Nothing under “${resolvedTag}” right now. Check back later, or browse the full blog.`}
+      links={[
+        { title: "All posts", href: "/blog", variant: "secondary" },
+        { title: "Home", href: "/" },
+      ]}
+    />
+  ) : (
+    <div class={container}>
+      <div class={containerInline}>
+        <section
+          class={gridWrapper}
+          transition:name={paginationViewTransition}
+          transition:animate={paginationOffsetTransition}
+        >
+          {data.map((blog) => (
+            <BlogCard {...blog} />
+          ))}
+        </section>
       </div>
-    )
-  }
+      <Pagination prev={url.prev} next={url.next} />
+    </div>
+  )}
 </Layout>

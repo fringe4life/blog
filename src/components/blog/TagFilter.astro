@@ -17,18 +17,16 @@ const filters = [
 ---
 
 <nav class:list={[container, tagFilter, columns]} aria-label="Filter by tag">
-  {
-    filters.map(({ label, tag }) => {
-      const active = tag === currentTag;
-      return (
-        <Link
-          href={tagHref(tag)}
-          variant={active ? "primary" : "secondary"}
-          aria-current={active ? "page" : undefined}
-        >
-          {label}
-        </Link>
-      );
-    })
-  }
+  {filters.map(({ label, tag }) => {
+    const active = tag === currentTag;
+    return (
+      <Link
+        href={tagHref(tag)}
+        variant={active ? "primary" : "secondary"}
+        aria-current={active ? "page" : undefined}
+      >
+        {label}
+      </Link>
+    );
+  })}
 </nav>

@@ -37,19 +37,21 @@ const blogsToShow = blogs
   />
   <Features />
   <section class={containerRows} aria-labelledby="recent-projects">
-    <Header tagName="h2" tagSize="h2" id="recent-projects"
-      >Recent Projects</Header
-    >
+    <Header tagName="h2" tagSize="h2" id="recent-projects">
+      Recent Projects
+    </Header>
     <Projects limit={3} />
   </section>
   <Connect />
   <section class={containerRows} aria-labelledby="recent-blog-posts">
-    <Header tagName="h2" tagSize="h2" id="recent-blog-posts"
-      >Recent Blog Posts</Header
-    >
+    <Header tagName="h2" tagSize="h2" id="recent-blog-posts">
+      Recent Blog Posts
+    </Header>
     <div class={containerInline}>
       <div class={gridWrapper}>
-        {blogsToShow.map((blog) => <BlogCard {...blog} />)}
+        {blogsToShow.map((blog) => (
+          <BlogCard {...blog} />
+        ))}
       </div>
     </div>
   </section>

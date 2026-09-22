@@ -30,8 +30,10 @@ const { pubDate, authorData, title, description, image, slug } = Astro.props;
       tagName="h1"
       tagSize="h2"
       id="blog-metadata-header"
-      transition:name={`${slug}-title`}>{title}</Header
+      transition:name={`${slug}-title`}
     >
+      {title}
+    </Header>
     <small>{authorData.data.name}</small>
     <p class={blogMetadataContent}>{description}</p>
   </header>

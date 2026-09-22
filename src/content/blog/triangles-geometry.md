@@ -18,7 +18,7 @@ A triangle is the simplest closed polygon: three sides, three angles, one region
 In Euclidean geometry, the interior angles of any triangle add to a straight angle:
 
 ```math
-α + β + γ = 180° = π radians
+\alpha + \beta + \gamma = 180^{\circ} = \pi \text{ radians}
 ```
 
 If you know two angles, the third is fixed. That single constraint ties local corner measures to the global shape.
@@ -32,7 +32,7 @@ Label the sides opposite angles `A`, `B`, and `C` as `a`, `b`, and `c`. Familiar
 - **Right** — one angle is `90°`, and Pythagoras holds:
 
 ```math
-a² + b² = c²
+a^{2} + b^{2} = c^{2}
 ```
 
 ## Area without height drama
@@ -40,7 +40,7 @@ a² + b² = c²
 When height is awkward to measure, Heron's formula still works from the three sides alone. With semi-perimeter `s = (a + b + c) / 2`:
 
 ```math
-Area = √[s(s - a)(s - b)(s - c)]
+\text{Area} = \sqrt{s(s - a)(s - b)(s - c)}
 ```
 
 ## Takeaway

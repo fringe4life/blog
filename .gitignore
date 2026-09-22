@@ -25,6 +25,7 @@ pnpm-debug.log*
 .fallow/
 .kombai/
 .qodo/
+.fallow
 
 # prettier experimental CLI cache
 .prettier-cache

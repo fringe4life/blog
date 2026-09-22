@@ -5,6 +5,7 @@ import svelte from "@astrojs/svelte";
 import cloudflare from "@astrojs/cloudflare";
 import { satteri } from "@astrojs/markdown-satteri";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import { temmlMathPlugin } from "./src/lib/temml-math.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -34,12 +35,13 @@ export default defineConfig({
   },
   site: "https://mod-6.coinnich09.workers.dev",
   session: false,
-  // Astro 7 default processor is Sätteri (Rust). Shiki still highlights fences.
+  // Sätteri parses math. Temml turns it into MathML at build. Shiki still highlights other fences.
   markdown: {
     processor: satteri({
       features: {
         math: true,
       },
+      hastPlugins: [temmlMathPlugin],
     }),
     syntaxHighlight: {
       type: "shiki",

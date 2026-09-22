@@ -36,13 +36,15 @@ if (!authorData) {
     transition:name={`${slug}-image`}
   />
   <div class:list={[cardBody, cardBodyLayout.blog]}>
-    <Header tagName="h3" tagSize="h4" transition:name={`${slug}-title`}
-      >{title}</Header
-    >
+    <Header tagName="h3" tagSize="h4" transition:name={`${slug}-title`}>
+      {title}
+    </Header>
     <div class={columns}>
       <FormattedDate pubDate={pubDate} transition:name={`${slug}-date`} />
       <small>{authorData.data.name}</small>
     </div>
-    <Link href={`/blog/${slug}`} variant="secondary" stretch>{title}</Link>
+    <Link href={`/blog/${slug}`} variant="secondary" stretch>
+      {title}
+    </Link>
   </div>
 </div>

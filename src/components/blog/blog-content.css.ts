@@ -37,15 +37,10 @@ globalStyle(`${blogContent} :not(pre) > code`, {
   color: variables.color.text,
 });
 
-globalStyle(`${blogContent} code.math-inline`, {
-  padding: `0.1em ${variables.space["4xs"]}`,
-  background: variables.color.frg,
-  border: `${variables.border.sm} solid ${variables.color.muted}`,
+globalStyle(`${blogContent} math.tml-display`, {
+  width: "max-content",
+  maxWidth: "100%",
+  marginInline: "auto",
+  marginBlock: variables.space.sm,
+  overflowX: "auto",
 });
-
-globalStyle(
-  `${blogContent} pre:has(code.math-display), ${blogContent} pre:has(code.language-math)`,
-  {
-    textAlign: "center",
-  },
-);

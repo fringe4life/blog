@@ -40,7 +40,9 @@ const {
       transition:name={paginationViewTransition}
       transition:animate={paginationOffsetTransition}
     >
-      {data.map((blog) => <BlogCard {...blog} />)}
+      {data.map((blog) => (
+        <BlogCard {...blog} />
+      ))}
     </section>
   </div>
   <Pagination prev={prev} next={next} />

@@ -14,7 +14,7 @@ tags: ["Math"]
 Consider the function
 
 ```math
-f(x) = x² + 2x + 5
+f(x) = x^{2} + 2x + 5
 ```
 
 For each input `x`, you get a height on a smooth curve. The value alone says where you are. The **derivative** says how that height is changing as `x` moves.
@@ -24,9 +24,11 @@ For each input `x`, you get a height on a smooth curve. The value alone says whe
 Power rule: `d/dx (xⁿ) = n · xⁿ⁻¹`. Constants vanish under differentiation.
 
 ```math
-d/dx (x²) = 2x
-d/dx (2x) = 2
-d/dx (5)  = 0
+\begin{aligned}
+\frac{d}{dx}(x^{2}) &= 2x \\
+\frac{d}{dx}(2x) &= 2 \\
+\frac{d}{dx}(5) &= 0
+\end{aligned}
 ```
 
 Add them:
@@ -52,7 +54,7 @@ Here `f'(x) = 2(x + 1) = 0` when `x = -1`. Near that point the quadratic bottoms
 The derivative is a limit of average rates:
 
 ```math
-f'(x) = lim (h → 0)  [f(x + h) - f(x)] / h
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
 ```
 
 For our `f`, that limit evaluates to `2x + 2`. Average rise-over-run becomes an exact slope—change without needing a finite step size.

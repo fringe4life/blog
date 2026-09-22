@@ -30,15 +30,15 @@ const { header, text, links } = Astro.props;
     class={imageStyles}
     loading="eager"
   />
-  <Header tagName="h1" tagSize="h2">{header}</Header>
+  <Header tagName="h1" tagSize="h2">
+    {header}
+  </Header>
   <p class={textStyles}>{text}</p>
   <div class={columns}>
-    {
-      links.map((link) => (
-        <Link href={link.href} variant={link.variant}>
-          {link.title}
-        </Link>
-      ))
-    }
+    {links.map((link) => (
+      <Link href={link.href} variant={link.variant}>
+        {link.title}
+      </Link>
+    ))}
   </div>
 </section>
